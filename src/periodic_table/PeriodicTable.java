@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tabla_periodica;
+
+package periodic_table;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author Mario
  */
-public class TablaPeriodica extends Application {
+public class PeriodicTable extends Application {
     
     
     private static final GridPane GRID = new GridPane();
@@ -41,6 +37,13 @@ public class TablaPeriodica extends Application {
         return mode ;
     }
     
+    private static Element getElement(int Z) {
+        for ( Element e : Element.values() )
+            if ( e.Z == Z )
+                return e ;
+        return null ;
+    }
+    
     private static void generateRandomBigCell() {
         Random random = new Random() ;
         int bigZ ;
@@ -48,7 +51,7 @@ public class TablaPeriodica extends Application {
             bigZ = random.nextInt(118)+1 ;
         } while ( clickedZ.size() != 118 && clickedZ.contains(bigZ) ) ;
         clickedZ.add(bigZ) ;
-        Element bigElement = Element.getElement(bigZ) ;
+        Element bigElement = getElement(bigZ) ;
         bigCell(bigElement) ;
     }
     
@@ -84,7 +87,7 @@ public class TablaPeriodica extends Application {
     
     public static void enterCell(Element elemento, ElementCell cell) {
         if ( !cell.isClicked() ) cell.setElementBG(true) ;
-        if ( !clicked && mode.equals("Inicio") ) TablaPeriodica.bigCell(elemento) ;
+        if ( !clicked && mode.equals("Inicio") ) PeriodicTable.bigCell(elemento) ;
     }
     
     public static void exitCell(ElementCell cell) {
@@ -108,10 +111,10 @@ public class TablaPeriodica extends Application {
     
     private void buildStack(int Z) {
         
-        Element elemento = Element.getElement(Z) ;
+        Element elemento = getElement(Z) ;
         ElementCell cell = new ElementCell(elemento) ;
-        int group = elemento.getGroup() ;
-        int period = elemento.getPeriod() ;
+        int group = elemento.group ;
+        int period = elemento.period ;
         
         
         if ( group != 0 ) {
@@ -171,9 +174,7 @@ public class TablaPeriodica extends Application {
         }
     } ;
     
-    private Scene initScene() throws IOException {
-        
-        Element.initReader() ;
+    private Scene initScene() {
         
         for ( int Z = 1 ; Z <= 118 ; Z++ ) buildStack(Z) ;
         Button botonPrueba = new Button("Colocar") ;

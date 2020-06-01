@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tabla_periodica;
+
+package periodic_table;
 
 import java.util.ArrayList;
 import javafx.event.EventHandler;
@@ -50,21 +46,21 @@ public class ElementCell extends StackPane {
     private final EventHandler<MouseEvent> mouseEnterEH = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            TablaPeriodica.enterCell(element, cell) ;
+            PeriodicTable.enterCell(element, cell) ;
         }
     } ;
     
     private final EventHandler<MouseEvent> mouseExitEH = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            TablaPeriodica.exitCell(cell) ;
+            PeriodicTable.exitCell(cell) ;
         }
     } ;
     
     private final EventHandler<MouseEvent> mouseClickEH = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            TablaPeriodica.clickCell(element, cell) ;
+            PeriodicTable.clickCell(element, cell) ;
         }
     } ;
     
@@ -72,12 +68,12 @@ public class ElementCell extends StackPane {
     // CONSTRUCTORES
     public ElementCell(Element element) {
         
-        name = element.getName() ;
-        symbol = element.getSymbol() ;
-        type = element.getType() ;
-        group = element.getGroup() ;
-        period = element.getPeriod() ;
-        atomicNum = element.getAtomicNum() ;
+        name = element.name ;
+        symbol = element.symbol ;
+        type = element.type ;
+        group = element.group ;
+        period = element.period ;
+        atomicNum = element.Z ;
         etymology = "" ;
         weight = "" ;
         abundance = "" ;
